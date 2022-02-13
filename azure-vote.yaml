@@ -24,7 +24,6 @@ spec:
             cpu: 250m
             memory: 256Mi
         ports:
-
         - containerPort: 6379
           name: redis
 apiVersion: v1
@@ -33,8 +32,7 @@ metadata:
   name: azure-vote-back
 spec:
   ports:
-
-- port: 6379
+   - port: 6379
   selector:
     app: azure-vote-back
 apiVersion: apps/v1
@@ -52,23 +50,20 @@ spec:
         app: azure-vote-front
     spec:
       containers:
-
-      - name: azure-vote-front
-        image: microsoft/azure-vote-front:v1
-        resources:
-        requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 250m
-            memory: 256Mi
-        ports:
-
-      - containerPort: 80
-        env:
-
+      	- name: azure-vote-front
+      image: microsoft/azure-vote-front:v1
+      resources:
+      requests:
+          cpu: 100m
+          memory: 128Mi
+      limits:
+          cpu: 250m
+          memory: 256Mi
+      ports:
+        - containerPort: 80
+      env:
         - name: REDIS
-          value: "azure-vote-back"
+        value: "azure-vote-back"
 apiVersion: v1
 kind: Service
 metadata:
@@ -76,7 +71,6 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-
-  - port: 80
+    - port: 80
   selector:
     app: azure-vote-front
