@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cna-express
+spec:
+  selector:
+    matchLabels:
+      app: cna-express
+  template:
+    metadata:
+      labels:
+        app: cna-express
+    spec:
+      containers:
+      - name: expressimage
+        image: sarutcacr.azurecr.io/expressimage
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
